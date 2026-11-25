@@ -1,0 +1,57 @@
+package com.example;
+
+import java.io.IOException;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class App extends Application {
+
+    private static Scene scene;
+
+    @Override
+    public void start(Stage primaryStage) {
+
+        // 1. Create Nodes (Components)
+        Label titleLabel = new Label("My First JavaFX App");
+        Button clickButton = new Button("Click Me!");
+
+        // Add an action to the button
+        clickButton.setOnAction(e -> {
+            titleLabel.setText("Button was clicked!");
+
+            System.out.println("Button clicked on: " + Thread.currentThread().getName());
+        });
+
+        // 2. Create a Layout Pane and add Nodes to it
+        VBox root = new VBox(15); // 15 is the spacing between elements
+        root.getChildren().addAll(titleLabel, clickButton);
+
+        // Center the elements
+        root.setStyle("-fx-alignment: center; -fx-padding: 20px; -fx-background-color: #f0f0f0;");
+
+        // 3. Create a Scene and attach the root layout
+        scene = new Scene(root, 400, 300);
+
+        // 4. Set the Scene on the Stage (Window)
+        primaryStage.setTitle("JavaFX Programmatic App");
+        primaryStage.setScene(scene);
+
+        // 5. Show the Window
+        primaryStage.show();
+    }
+
+    static void setRoot(String fxml) throws IOException {
+        Parent root = FXMLLoader.load(App.class.getResource("/com/example/" + fxml + ".fxml"));
+        scene.setRoot(root);
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}

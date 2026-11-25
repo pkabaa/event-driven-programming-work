@@ -1,0 +1,10 @@
+# Java compiled output
+*.class
+
+# Maven build output
+target/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
